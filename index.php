@@ -3,13 +3,19 @@
     <input type="submit">
 </form>
 <?php
-
 date_default_timezone_set("Europe/Bratislava");
 print 'Ahoj <br>';
 $date = date('d/m/Y');
 $time = date('H:i:s');
 $date_time = $date . " | " . $time;
 print 'Teraz je ' . $date_time;
+
+
+
+if (date('H') >= 20) {
+    print '<br>Príchod sa nemôže zapísať.';
+    exit;
+}
 if (date('H') >= 8) {
     print '<br> Meškáš!';
 }
@@ -19,35 +25,31 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if (empty($name)) {
         print '<br>Napíš svoje meno';
     } else {
-        // LOGGER     
-        function logger($date_time, $name)
-        {
-            if (empty($name)) {
-                print '<br>Napíš svoje meno';
-            } else {
-                $logMessage = $date_time . " | Meno: " . $name;
-                if (date('H') >= 8) {
-                    file_put_contents("logger.log", $logMessage . " | Meškanie \n", FILE_APPEND);
-                } else {
-                    file_put_contents("logger.log", $logMessage .  "\n", FILE_APPEND);
-                }
-            }
-            $jsonData = file_get_contents("names.json");
-            $names = json_decode($jsonData, true);
-            $names[] = $name;
-            file_put_contents("names.json", json_encode($names));
-        }
-
-
         logger($date_time, $name);
     }
 }
-?>
-<br>
-<br>
-<br>
-<?php
-// LOGGER READER
+/*          
+         FUNCTIONS
+
+*/
+
+function logger($date_time, $name)
+{
+    if (empty($name)) {
+        print '<br>Napíš svoje meno';
+    } else {
+        $logMessage = $date_time . " | Meno: " . $name;
+        if (date('H') >= 8) {
+            file_put_contents("logger.log", $logMessage . " | Meškanie \n", FILE_APPEND);
+        } else {
+            file_put_contents("logger.log", $logMessage .  "\n", FILE_APPEND);
+        }
+    }
+    $jsonData = file_get_contents("names.json");
+    $names = json_decode($jsonData, true);
+    $names[] = $name;
+    file_put_contents("names.json", json_encode($names));
+}
 function getLogs()
 {
     print "<pre>";
@@ -60,6 +62,5 @@ function getLogs()
     print "</pre>";
 }
 getLogs();
-
-?>
-
+$students = file_get_contents('names.json');
+print count(json_decode($students));
