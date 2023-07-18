@@ -46,8 +46,15 @@ function logger($date_time, $name)
         }
     }
     $jsonData = file_get_contents("names.json");
-    $names = json_decode($jsonData, true);
-    $names[] = $name;
+    $names = array();
+    if ($jsonData) {
+        $names = json_decode($jsonData, true);
+    }
+    $names[] = array(
+        'meno' => $name,
+        'order' => count($names) + 1
+    );
+
     file_put_contents("names.json", json_encode($names));
 }
 function getLogs()
@@ -62,5 +69,3 @@ function getLogs()
     print "</pre>";
 }
 getLogs();
-$students = file_get_contents('names.json');
-print count(json_decode($students));
