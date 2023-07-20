@@ -10,41 +10,45 @@ $time = date('H:i:s');
 $date_time = $date . " | " . $time;
 print 'Teraz je ' . $date_time;
 
+check($date_time);
+getLogs();
 
-
-if (date('H') >= 20) {
-    print '<br>Príchod sa nemôže zapísať.';
-    exit;
-}
-if (date('H') >= 8) {
-    print '<br> Meškáš!';
-}
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $name = $_POST['name'];
-
-    if (empty($name)) {
-        print '<br>Napíš svoje meno';
-    } else {
-        logger($date_time, $name);
-    }
-}
 /*          
-         FUNCTIONS
+FUNCTIONS
 
 */
 
+function check($date_time)
+{
+    if (date('H') >= 20) {
+        print '<br>Príchod sa nemôže zapísať.';
+        exit;
+    }
+    if (date('H') >= 8) {
+        print '<br> Meškáš!';
+    }
+    if ($_SERVER["REQUEST_METHOD"] === "POST") {
+        $name = $_POST['name'];
+
+        if (empty($name)) {
+            print '<br>Napíš svoje meno';
+        } else {
+            logger($date_time, $name);
+        }
+    }
+}
 function logger($date_time, $name)
 {
     if (empty($name)) {
-        print '<br>Napíš svoje meno';
-    } else {
-        $logMessage = $date_time . " | Meno: " . $name;
-        if (date('H') >= 8) {
-            file_put_contents("logger.log", $logMessage . " | Meškanie \n", FILE_APPEND);
-        } else {
-            file_put_contents("logger.log", $logMessage .  "\n", FILE_APPEND);
-        }
+        return '<br>Napíš svoje meno';
     }
+    $logMessage = $date_time . " | Meno: " . $name;
+    if (date('H') >= 8) {
+        file_put_contents("logger.log", $logMessage . " | Meškanie \n", FILE_APPEND);
+    } else {
+        file_put_contents("logger.log", $logMessage .  "\n", FILE_APPEND);
+    }
+
     $jsonData = file_get_contents("names.json");
     $names = array();
     if ($jsonData) {
@@ -65,7 +69,12 @@ function getLogs()
     print "</pre>";
     print "<pre>";
     $names = file_get_contents('names.json') or die('Súbor s menami neexistuje');
-    print $names;
+    $name = json_decode($names, true);
+    
+    $json = '';
+    foreach ($name as $box) {
+       $json .= '| Meno:'.$box['meno']. ' , Poradie:'.$box['order'] . '|<br>';
+    }
+    print $json;
     print "</pre>";
 }
-getLogs();
