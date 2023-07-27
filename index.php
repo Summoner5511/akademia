@@ -4,21 +4,24 @@
 </form>
 <?php
 date_default_timezone_set("Europe/Bratislava");
-print 'Ahoj <br>';
 $date = date('d/m/Y');
 $time = date('H:i:s');
 $date_time = $date . " | " . $time;
-print 'Teraz je ' . $date_time;
-
-check($date_time);
-getLogs();
+welcome($date_time);
+function welcome($date_time)
+{
+    print 'Ahoj <br>';
+    print 'Teraz je ' . $date_time;
+    checkTimeAndName($date_time);
+    getLogs();
+}
 
 /*          
 FUNCTIONS
 
 */
 
-function check($date_time)
+function checkTimeAndName($date_time)
 {
     if (date('H') >= 20) {
         print '<br>Príchod sa nemôže zapísať.';
@@ -33,11 +36,11 @@ function check($date_time)
         if (empty($name)) {
             print '<br>Napíš svoje meno';
         } else {
-            logger($date_time, $name);
+            loggerOfStudents($date_time, $name);
         }
     }
 }
-function logger($date_time, $name)
+function loggerOfStudents($date_time, $name)
 {
     if (empty($name)) {
         return '<br>Napíš svoje meno';
@@ -54,12 +57,21 @@ function logger($date_time, $name)
     if ($jsonData) {
         $names = json_decode($jsonData, true);
     }
-    $names[] = array(
-        'meno' => $name,
-        'order' => count($names) + 1
-    );
+    if (date('H') >= 8) {
+        $names[] = array(
+            'meno' => $name,
+            'order' => count($names) + 1,
+            'late' => 'yes'
+        );
+    } else {
+        $names[] = array(
+            'meno' => $name,
+            'order' => count($names) + 1,
+            'late' => 'no'
+        );
+    }
 
-    file_put_contents("names.json", json_encode($names));
+    file_put_contents("names.json", json_encode($names, JSON_PRETTY_PRINT));
 }
 function getLogs()
 {
@@ -70,10 +82,10 @@ function getLogs()
     print "<pre>";
     $names = file_get_contents('names.json') or die('Súbor s menami neexistuje');
     $name = json_decode($names, true);
-    
+
     $json = '';
     foreach ($name as $box) {
-       $json .= '| Meno:'.$box['meno']. ' , Poradie:'.$box['order'] . '|<br>';
+        $json .= '| Meno:' . $box['meno'] . ' , Poradie:' . $box['order'] . ' , Late: ' . $box['late'] . '|<br>';
     }
     print $json;
     print "</pre>";
