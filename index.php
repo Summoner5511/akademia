@@ -83,10 +83,10 @@ function getLogs()
     $names = file_get_contents('names.json') or die('Súbor s menami neexistuje');
     $name = json_decode($names, true);
 
-    $json = '';
+    $namesInJson = '';
     foreach ($name as $box) {
-        $json .= '| Meno:' . $box['meno'] . ' , Poradie:' . $box['order'] . ' , Late: ' . $box['late'] . '|<br>';
+        $namesInJson .= '| Meno:' . $box['meno'] . ' , Poradie:' . $box['order'] . ' , Late: ' . $box['late'] . '|<br>';
     }
-    print $json;
+    print $namesInJson;
     print "</pre>";
 }
