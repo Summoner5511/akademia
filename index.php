@@ -7,20 +7,20 @@ date_default_timezone_set("Europe/Bratislava");
 class logOfStudents
 {
 
-        /*          
+    /*          
         FUNCTIONS
         
         */
-        
-        public function welcome($date_time)
-        {
-            $date_time = date('d/m/Y H:i:s');
-            print 'Ahoj <br>';
-            print 'Teraz je ' . $date_time;
-            $this->checkTimeAndName($date_time);
-            $this->getLogs();
-        }
-        public function checkTimeAndName($date_time)
+
+    public function welcome($date_time)
+    {
+        $date_time = date('d/m/Y H:i:s');
+        print 'Ahoj <br>';
+        print 'Teraz je ' . $date_time;
+        $this->checkTimeAndName($date_time);
+        $this->getLogs();
+    }
+    public function checkTimeAndName($date_time)
     {
         if (date('H') >= 20) {
             print '<br>Príchod sa nemôže zapísať.';
@@ -57,19 +57,13 @@ class logOfStudents
         if ($jsonData) {
             $names = json_decode($jsonData, true);
         }
-        if (date('H') >= 8) {
-            $names[] = array(
-                'meno' => $name,
-                'order' => count($names) + 1,
-                'late' => 'yes'
-            );
-        } else {
-            $names[] = array(
-                'meno' => $name,
-                'order' => count($names) + 1,
-                'late' => 'no'
-            );
-        }
+        
+        $late = (date('H') >= 8) ? 'yes' : 'no';
+        $names[] = [
+            'meno' => $name,
+            'order' => count($names) + 1,
+            'late' => $late
+        ];
 
         file_put_contents("names.json", json_encode($names, JSON_PRETTY_PRINT));
     }
