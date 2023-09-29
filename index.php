@@ -7,20 +7,29 @@ date_default_timezone_set("Europe/Bratislava");
 class logOfStudents
 {
 
-    /*          
-        FUNCTIONS
-        
-        */
+    public $date_time;
+ 
+ 
+    /*     
+    ---------------     
+        METHODS    
+    ---------------      
+    */
 
-    public function welcome($date_time)
+
+    public function __construct()
     {
-        $date_time = date('d/m/Y H:i:s');
+        $this->date_time = date('d/m/Y H:i:s');
+    }
+    public function welcome()
+    {
+        
         print 'Ahoj <br>';
-        print 'Teraz je ' . $date_time;
-        $this->checkTimeAndName($date_time);
+        print 'Teraz je ' . $this->date_time;
+        $this->checkTimeAndName();
         $this->getLogs();
     }
-    public function checkTimeAndName($date_time)
+    public function checkTimeAndName()
     {
         if (date('H') >= 20) {
             print '<br>Príchod sa nemôže zapísať.';
@@ -32,20 +41,20 @@ class logOfStudents
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $name = $_POST['name'];
         } elseif (isset($_GET['meno'])) {
-            $name = $_GET['meno'];
+            $name = $_POST['meno'];
         }
         if (empty($name)) {
             print '<br>Napíš svoje meno';
         } else {
-            $this->loggerOfStudents($date_time, $name);
+            $this->loggerOfStudents($name);
         }
     }
-    public function loggerOfStudents($date_time, $name)
+    public function loggerOfStudents($name)
     {
         if (empty($name)) {
             return '<br>Napíš svoje meno';
         }
-        $logMessage = $date_time . " | Meno: " . $name;
+        $logMessage = $this->date_time . " | Meno: " . $name;
         if (date('H') >= 8) {
             file_put_contents("logger.log", $logMessage . " | Meškanie \n", FILE_APPEND);
         } else {
@@ -86,4 +95,4 @@ class logOfStudents
     }
 }
 $welcome = new logOfStudents;
-$welcome->welcome($date_time);
+$welcome->welcome();
