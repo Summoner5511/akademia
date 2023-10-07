@@ -80,7 +80,7 @@ class logOfStudents
 }
 class PrintLogs
 {
-    public function getLogs()
+    public static function getLogs()
     {
         print "<pre>";
         $logs = file_get_contents('logger.log') or die('Log súbor neexistuje');
@@ -99,6 +99,8 @@ class PrintLogs
     }
 }
 $welcome = new logOfStudents;
-$print = new PrintLogs;
 $welcome->welcome();
-$print->getLogs();
+PrintLogs::getLogs();
+
+
+// ESTE DOROB TO, aby si mal mat aj nejaku pomocnu private metodu - pozri osnovy
