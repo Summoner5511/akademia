@@ -27,7 +27,7 @@ class logOfStudents
         print 'Ahoj <br>';
         print 'Teraz je ' . $this->date_time;
         $this->checkTimeAndName();
-        $this->getLogs();
+        
     }
     public function checkTimeAndName()
     {
@@ -76,6 +76,10 @@ class logOfStudents
 
         file_put_contents("names.json", json_encode($names, JSON_PRETTY_PRINT));
     }
+    
+}
+class PrintLogs
+{
     public function getLogs()
     {
         print "<pre>";
@@ -95,4 +99,6 @@ class logOfStudents
     }
 }
 $welcome = new logOfStudents;
+$print = new PrintLogs;
 $welcome->welcome();
+$print->getLogs();
