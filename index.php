@@ -29,26 +29,7 @@ class logOfStudents
         $this->checkTimeAndName();
         
     }
-    public function checkTimeAndName()
-    {
-        if (date('H') >= 20) {
-            print '<br>Príchod sa nemôže zapísať.';
-            exit;
-        }
-        if (date('H') >= 8) {
-            print '<br> Meškáš!';
-        }
-        if ($_SERVER["REQUEST_METHOD"] === "POST") {
-            $name = $_POST['name'];
-        } elseif (isset($_GET['meno'])) {
-            $name = $_POST['meno'];
-        }
-        if (empty($name)) {
-            print '<br>Napíš svoje meno';
-        } else {
-            $this->loggerOfStudents($name);
-        }
-    }
+    
     public function loggerOfStudents($name)
     {
         if (empty($name)) {
@@ -75,6 +56,26 @@ class logOfStudents
         ];
 
         file_put_contents("names.json", json_encode($names, JSON_PRETTY_PRINT));
+    }
+    private function checkTimeAndName()
+    {
+        if (date('H') >= 20) {
+            print '<br>Príchod sa nemôže zapísať.';
+            exit;
+        }
+        if (date('H') >= 8) {
+            print '<br> Meškáš!';
+        }
+        if ($_SERVER["REQUEST_METHOD"] === "POST") {
+            $name = $_POST['name'];
+        } elseif (isset($_GET['meno'])) {
+            $name = $_POST['meno'];
+        }
+        if (empty($name)) {
+            print '<br>Napíš svoje meno';
+        } else {
+            $this->loggerOfStudents($name);
+        }
     }
     
 }
@@ -103,4 +104,3 @@ $welcome->welcome();
 PrintLogs::getLogs();
 
 
-// ESTE DOROB TO, aby si mal mat aj nejaku pomocnu private metodu - pozri osnovy
