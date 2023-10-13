@@ -1,3 +1,5 @@
+BY PYREX
+
 <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
     Meno: <input type="text" name="name">
     <input type="submit">
