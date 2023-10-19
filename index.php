@@ -6,7 +6,7 @@ BY PYREX
 </form>
 <?php
 date_default_timezone_set("Europe/Bratislava");
-class logOfStudents
+class LogOfStudents
 {
 
     public $date_time;
@@ -32,7 +32,7 @@ class logOfStudents
         
     }
     
-    public function loggerOfStudents($name)
+    public function LoggerOfStudents($name)
     {
         if (empty($name)) {
             return '<br>Napíš svoje meno';
@@ -59,7 +59,7 @@ class logOfStudents
 
         file_put_contents("names.json", json_encode($names, JSON_PRETTY_PRINT));
     }
-    private function checkTimeAndName()
+    private function CheckTimeAndName()
     {
         if (date('H') >= 20) {
             print '<br>Príchod sa nemôže zapísať.';
@@ -76,14 +76,14 @@ class logOfStudents
         if (empty($name)) {
             print '<br>Napíš svoje meno';
         } else {
-            $this->loggerOfStudents($name);
+            $this->LoggerOfStudents($name);
         }
     }
     
 }
 class PrintLogs
 {
-    public static function getLogs()
+    public static function GetLogs()
     {
         print "<pre>";
         $logs = file_get_contents('logger.log') or die('Log súbor neexistuje');
@@ -101,8 +101,8 @@ class PrintLogs
         print "</pre>";
     }
 }
-$welcome = new logOfStudents;
+$welcome = new LogOfStudents;
 $welcome->welcome();
-PrintLogs::getLogs();
+PrintLogs::GetLogs();
 
 
