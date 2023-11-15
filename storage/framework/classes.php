@@ -19,4 +19,5 @@
   'RainLab\\User\\Components\\ResetPassword' => 'plugins\\rainlab\\user\\components\\ResetPassword.php',
   'app\\arrival\\Controllers\\arrivals' => 'plugins\\app\\arrival\\controllers\\arrivals.php',
   'App\\Arrival\\Models\\Arrival' => 'plugins\\app\\arrival\\models\\Arrival.php',
+  'App\\Arrival\\Controllers\\Arrivals' => 'plugins\\app\\arrival\\controllers\\Arrivals.php',
 );
