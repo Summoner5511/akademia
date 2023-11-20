@@ -10,8 +10,8 @@ Route::get('/arrivals', function () {
 Route::post('/arrivals', function(){
 	$arrival = new Arrival();
 	$arrival->name = post('name');
-	$arrival->time = post('time');
 	$arrival->save();
+	
 	return $arrival;
 });
       
