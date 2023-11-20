@@ -20,4 +20,5 @@
   'app\\arrival\\Controllers\\arrivals' => 'plugins\\app\\arrival\\controllers\\arrivals.php',
   'App\\Arrival\\Models\\Arrival' => 'plugins\\app\\arrival\\models\\Arrival.php',
   'App\\Arrival\\Controllers\\Arrivals' => 'plugins\\app\\arrival\\controllers\\Arrivals.php',
+  'rainlab\\user\\Controllers\\usergroups' => 'plugins\\rainlab\\user\\controllers\\usergroups.php',
 );

@@ -17,9 +17,9 @@ class Plugin extends PluginBase
     {
         return [
             'name'        => 'Arrival',
-            'description' => 'No description provided yet...',
-            'author'      => 'App',
-            'icon'        => 'icon-leaf'
+            'description' => 'Logger studentov',
+            'author'      => 'Pyrex',
+            'icon'        => 'icon-user'
         ];
     }
 
