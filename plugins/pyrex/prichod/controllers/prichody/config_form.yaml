@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: Prichody
+
+# Model Form Field configuration
+form: $/pyrex/prichod/models/prichody/fields.yaml
+
+# Model Class name
+modelClass: Pyrex\Prichod\Models\Prichody
+
+# Default redirect location
+defaultRedirect: pyrex/prichod/prichody
+
+# Create page
+create:
+    title: Create Prichody
+    redirect: pyrex/prichod/prichody/update/:id
+    redirectClose: pyrex/prichod/prichody
+
+# Update page
+update:
+    title: Edit Prichody
+    redirect: pyrex/prichod/prichody
+    redirectClose: pyrex/prichod/prichody
+
+# Preview page
+preview:
+    title: Preview Prichody
