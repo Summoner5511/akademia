@@ -1,12 +1,12 @@
-<?php namespace Pyrex\Prichod\Controllers;
+<?php namespace Pyrex\Departure\Controllers;
 
-use Backend\Facades\BackendMenu;
+use BackendMenu;
 use Backend\Classes\Controller;
 
 /**
- * Prichody Back-end Controller
+ * Departures Back-end Controller
  */
-class Prichody extends Controller
+class Departures extends Controller
 {
     /**
      * @var array Behaviors that are implemented by this controller.
@@ -30,6 +30,6 @@ class Prichody extends Controller
     {
         parent::__construct();
 
-        BackendMenu::setContext('Pyrex.Prichod', 'prichod', 'prichody');
+        BackendMenu::setContext('Pyrex.Departure', 'departure', 'departures');
     }
 }

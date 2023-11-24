@@ -1,10 +1,10 @@
-<?php namespace Pyrex\Prichod;
+<?php namespace Pyrex\Departure;
 
 use Backend;
 use System\Classes\PluginBase;
 
 /**
- * prichod Plugin Information File
+ * Departure Plugin Information File
  */
 class Plugin extends PluginBase
 {
@@ -16,9 +16,9 @@ class Plugin extends PluginBase
     public function pluginDetails()
     {
         return [
-            'name'        => 'prichod',
+            'name'        => 'Departure',
             'description' => 'No description provided yet...',
-            'author'      => 'pyrex',
+            'author'      => 'Pyrex',
             'icon'        => 'icon-leaf'
         ];
     }
@@ -53,7 +53,7 @@ class Plugin extends PluginBase
         return []; // Remove this line to activate
 
         return [
-            'Pyrex\Prichod\Components\MyComponent' => 'myComponent',
+            'Pyrex\Departure\Components\MyComponent' => 'myComponent',
         ];
     }
 
@@ -64,11 +64,11 @@ class Plugin extends PluginBase
      */
     public function registerPermissions()
     {
-       
+        return []; // Remove this line to activate
 
         return [
-            'pyrex.prichod.some_permission' => [
-                'tab' => 'prichod',
+            'pyrex.departure.some_permission' => [
+                'tab' => 'Departure',
                 'label' => 'Some permission'
             ],
         ];
@@ -84,11 +84,11 @@ class Plugin extends PluginBase
         
 
         return [
-            'prichod' => [
-                'label'       => 'prichod',
-                'url'         => Backend::url('pyrex/prichod/prichoy'),
+            'departure' => [
+                'label'       => 'Departure',
+                'url'         => Backend::url('pyrex/departure/departures'),
                 'icon'        => 'icon-leaf',
-                'permissions' => ['pyrex.prichod.*'],
+                'permissions' => ['pyrex.departure.*'],
                 'order'       => 500,
             ],
         ];

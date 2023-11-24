@@ -1,18 +1,18 @@
-<?php namespace Pyrex\Prichod\Models;
+<?php namespace Pyrex\Departure\Models;
 
-use October\Rain\Database\Model;
+use Model;
 
 /**
- * Prichod Model
+ * Departure Model
  */
-class Prichod extends Model
+class Departure extends Model
 {
     use \October\Rain\Database\Traits\Validation;
 
     /**
      * @var string The database table used by the model.
      */
-    public $table = 'pyrex_prichod_prichods';
+    public $table = 'pyrex_departure_departures';
 
     /**
      * @var array Guarded fields

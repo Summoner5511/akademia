@@ -3,16 +3,16 @@
 # ===================================
 
 # Model List Column configuration
-list: $/pyrex/prichod/models/prichody/columns.yaml
+list: $/pyrex/departure/models/departure/columns.yaml
 
 # Model Class name
-modelClass: Pyrex\Prichod\Models\Prichody
+modelClass: Pyrex\Departure\Models\Departure
 
 # List Title
-title: Manage Prichodies
+title: Manage Departures
 
 # Link URL for each record
-recordUrl: pyrex/prichod/prichody/update/:id
+recordUrl: pyrex/departure/departures/update/:id
 
 # Message to display if the list is empty
 noRecordsMessage: backend::lang.list.no_records

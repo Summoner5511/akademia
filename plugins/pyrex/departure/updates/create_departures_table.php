@@ -1,14 +1,14 @@
-<?php namespace Pyrex\Prichod\Updates;
+<?php namespace Pyrex\Departure\Updates;
 
-use October\Rain\Support\Facades\Schema;
+use Schema;
 use October\Rain\Database\Schema\Blueprint;
 use October\Rain\Database\Updates\Migration;
 
-class CreatePrichodsTable extends Migration
+class CreateDeparturesTable extends Migration
 {
     public function up()
     {
-        Schema::create('pyrex_prichod_prichods', function (Blueprint $table) {
+        Schema::create('pyrex_departure_departures', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
             $table->timestamps();
@@ -17,6 +17,6 @@ class CreatePrichodsTable extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('pyrex_prichod_prichods');
+        Schema::dropIfExists('pyrex_departure_departures');
     }
 }

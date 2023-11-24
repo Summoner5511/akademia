@@ -1,6 +1,6 @@
 <?php Block::put('breadcrumb') ?>
     <ul>
-        <li><a href="<?= Backend::url('pyrex/prichod/prichody') ?>">Prichody</a></li>
+        <li><a href="<?= Backend::url('pyrex/departure/departures') ?>">Departures</a></li>
         <li><?= e($this->pageTitle) ?></li>
     </ul>
 <?php Block::endPut() ?>
@@ -19,11 +19,10 @@
                     type="submit"
                     data-request="onSave"
                     data-browser-validate
-                    data-request-data="redirect:0"
                     data-hotkey="ctrl+s, cmd+s"
-                    data-load-indicator="Saving Prichody..."
+                    data-load-indicator="Creating Departure..."
                     class="btn btn-primary">
-                    <u>S</u>ave
+                    Create
                 </button>
                 <button
                     type="button"
@@ -31,19 +30,12 @@
                     data-browser-validate
                     data-request-data="close:1"
                     data-hotkey="ctrl+enter, cmd+enter"
-                    data-load-indicator="Saving Prichody..."
+                    data-load-indicator="Creating Departure..."
                     class="btn btn-default">
-                    Save and Close
-                </button>
-                <button
-                    type="button"
-                    class="oc-icon-trash-o btn-icon danger pull-right"
-                    data-request="onDelete"
-                    data-load-indicator="Deleting Prichody..."
-                    data-request-confirm="Delete this prichody?">
+                    Create and Close
                 </button>
                 <span class="btn-text">
-                    or <a href="<?= Backend::url('pyrex/prichod/prichody') ?>">Cancel</a>
+                    or <a href="<?= Backend::url('pyrex/departure/departures') ?>">Cancel</a>
                 </span>
             </div>
         </div>
@@ -53,6 +45,6 @@
 <?php else: ?>
 
     <p class="flash-message static error"><?= e($this->fatalError) ?></p>
-    <p><a href="<?= Backend::url('pyrex/prichod/prichody') ?>" class="btn btn-default">Return to prichody list</a></p>
+    <p><a href="<?= Backend::url('pyrex/departure/departures') ?>" class="btn btn-default">Return to departures list</a></p>
 
 <?php endif ?>

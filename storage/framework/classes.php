@@ -23,7 +23,8 @@
   'rainlab\\user\\Controllers\\usergroups' => 'plugins\\rainlab\\user\\controllers\\usergroups.php',
   'cms\\Controllers\\themes' => 'modules\\cms\\controllers\\themes.php',
   'backend\\Controllers\\users' => 'modules\\backend\\controllers\\users.php',
-  'pyrex\\prichod\\Plugin' => 'plugins\\pyrex\\prichod\\Plugin.php',
-  'pyrex\\prichod\\Controllers\\prichody' => 'plugins\\pyrex\\prichod\\controllers\\prichody.php',
-  'Pyrex\\Prichod\\Models\\Prichody' => 'plugins\\pyrex\\prichod\\models\\Prichody.php',
+  'pyrex\\departure\\Plugin' => 'plugins\\pyrex\\departure\\Plugin.php',
+  'pyrex\\departure\\Controllers\\departures' => 'plugins\\pyrex\\departure\\controllers\\departures.php',
+  'Pyrex\\Departure\\Models\\Departure' => 'plugins\\pyrex\\departure\\models\\Departure.php',
+  'pyrex\\departure\\Controllers\\Departures' => 'plugins\\pyrex\\departure\\controllers\\Departures.php',
 );
