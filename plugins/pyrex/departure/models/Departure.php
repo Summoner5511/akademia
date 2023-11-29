@@ -1,6 +1,6 @@
 <?php namespace Pyrex\Departure\Models;
 
-use Model;
+use October\Rain\Database\Model;
 
 /**
  * Departure Model

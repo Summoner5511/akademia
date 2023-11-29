@@ -1,8 +1,9 @@
 <?php namespace Pyrex\Departure;
 
+use App\Arrival\Models\Arrival;
 use Backend;
 use System\Classes\PluginBase;
-
+use Symfony\Contracts\EventDispatcher\Event;
 /**
  * Departure Plugin Information File
  */
@@ -40,7 +41,9 @@ class Plugin extends PluginBase
      */
     public function boot()
     {
-
+        Event::listen('event.arrival', function(){
+            
+        });
     }
 
     /**

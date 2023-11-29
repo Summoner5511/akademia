@@ -1,6 +1,6 @@
 <?php namespace Pyrex\Departure\Controllers;
 
-use BackendMenu;
+use Backend\Facades\BackendMenu;
 use Backend\Classes\Controller;
 
 /**
