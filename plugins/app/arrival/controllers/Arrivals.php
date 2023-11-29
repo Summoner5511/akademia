@@ -32,4 +32,5 @@ class Arrivals extends Controller
 
         BackendMenu::setContext('App.Arrival', 'arrival', 'arrivals');
     }
+    
 }

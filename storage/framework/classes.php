@@ -27,4 +27,7 @@
   'pyrex\\departure\\Controllers\\departures' => 'plugins\\pyrex\\departure\\controllers\\departures.php',
   'Pyrex\\Departure\\Models\\Departure' => 'plugins\\pyrex\\departure\\models\\Departure.php',
   'pyrex\\departure\\Controllers\\Departures' => 'plugins\\pyrex\\departure\\controllers\\Departures.php',
+  'App\\Arrival\\Http\\Controllers\\ArrivalsController' => 'plugins\\app\\arrival\\http\\controllers\\ArrivalsController.php',
+  'App\\Arrival\\Http\\Controllers\\TestController' => 'plugins\\app\\arrival\\http\\controllers\\TestController.php',
+  'App\\Arrival\\Http\\Resources\\ArrivalResource' => 'plugins\\app\\arrival\\http\\resources\\ArrivalResource.php',
 );

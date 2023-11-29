@@ -32,4 +32,5 @@ class Departures extends Controller
 
         BackendMenu::setContext('Pyrex.Departure', 'departure', 'departures');
     }
+    
 }

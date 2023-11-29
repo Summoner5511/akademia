@@ -3,7 +3,7 @@
 use App\Arrival\Models\Arrival;
 use Backend;
 use System\Classes\PluginBase;
-use Symfony\Contracts\EventDispatcher\Event;
+use Illuminate\Support\Facades\Event;
 /**
  * Departure Plugin Information File
  */
