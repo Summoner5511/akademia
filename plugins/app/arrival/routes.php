@@ -12,8 +12,8 @@ Route::group([
     'prefix' => 'api/v1'
 ], function () {
 	Route::get('arrivals', '\App\Arrival\Http\Controllers\ArrivalsController@index');
-    // Route::get('arrivals', [ArrivalsController::class, 'index']);
-    // Route::get('arrivals/{id}', [ArrivalsController::class, 'show']);
+    //Route::get('arrivals', [ArrivalsController::class, 'index']);
+    Route::get('arrivals/{id}', '\App\Arrival\Http\Controllers\ArrivalsController@show');
 });
 
       

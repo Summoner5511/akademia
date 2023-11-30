@@ -30,4 +30,10 @@
   'App\\Arrival\\Http\\Controllers\\ArrivalsController' => 'plugins\\app\\arrival\\http\\controllers\\ArrivalsController.php',
   'App\\Arrival\\Http\\Controllers\\TestController' => 'plugins\\app\\arrival\\http\\controllers\\TestController.php',
   'App\\Arrival\\Http\\Resources\\ArrivalResource' => 'plugins\\app\\arrival\\http\\resources\\ArrivalResource.php',
+  'AppUser\\User\\Plugin' => 'plugins\\appuser\\user\\Plugin.php',
+  'appuser\\user\\Controllers\\Users' => 'plugins\\appuser\\user\\controllers\\Users.php',
+  'AppUser\\User\\Models\\User' => 'plugins\\appuser\\user\\models\\User.php',
+  'AppUser\\User\\Http\\Controllers\\UsersController' => 'plugins\\appuser\\user\\http\\controllers\\UsersController.php',
+  'appuser\\user\\Controllers\\users' => 'plugins\\appuser\\user\\controllers\\users.php',
+  'AppUser\\User\\Http\\Resources\\UserResource' => 'plugins\\appuser\\user\\http\\resources\\UserResource.php',
 );
