@@ -15,15 +15,15 @@ class UsersController extends Controller
         return UserResource::collection($users);
         
     }
-    public function recieve()
+    public function register()
     {
-        $data = post();
+        
 
-        $user = new user();
-        $user->username = array_values($data)[0];
-        $user->password = Hash::make(array_values($data)[1]);
-        $user->token =array_values($data)[2]; 
-        $user->save();
+        $User = new User();
+        $User->username = post('username');
+        $User->password = Hash::make(post('password'));
+        $User->token = post('token'); 
+        $User->save();
         
     }
 

@@ -85,7 +85,7 @@ class Plugin extends PluginBase
 
         return [
             'user' => [
-                'label'       => 'Login',
+                'label'       => 'Users',
                 'url'         => Backend::url('appuser/user/Users'),
                 'icon'        => 'icon-id-card',
                 'permissions' => ['appuser.user.*'],
