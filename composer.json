@@ -6,5 +6,13 @@
             "email": "peterkrupka5@gmail.com"
         }
     ],
-    "require": {}
+    "require": {
+        "tymon/jwt-auth": "^1.0"
+    },
+    "config": {
+        "allow-plugins": {
+            "composer/installers": true,
+            "kylekatarnls/update-helper": true
+        }
+    }
 }
