@@ -1,0 +1,10 @@
+{
+    "name": "peter/htdocs",
+    "authors": [
+        {
+            "name": "Peter Krupka",
+            "email": "peterkrupka5@gmail.com"
+        }
+    ],
+    "require": {}
+}
