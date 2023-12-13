@@ -41,7 +41,7 @@ abstract class AbstractSurrogate implements SurrogateInterface
     /**
      * Returns a new cache strategy instance.
      *
-     * @return ResponseCacheStrategyInterface
+     * @return ResponseCacheStrategyInterface A ResponseCacheStrategyInterface instance
      */
     public function createCacheStrategy()
     {
@@ -57,7 +57,7 @@ abstract class AbstractSurrogate implements SurrogateInterface
             return false;
         }
 
-        return str_contains($value, sprintf('%s/1.0', strtoupper($this->getName())));
+        return false !== strpos($value, sprintf('%s/1.0', strtoupper($this->getName())));
     }
 
     /**
@@ -88,14 +88,14 @@ abstract class AbstractSurrogate implements SurrogateInterface
     /**
      * {@inheritdoc}
      */
-    public function handle(HttpCache $cache, string $uri, string $alt, bool $ignoreErrors)
+    public function handle(HttpCache $cache, $uri, $alt, $ignoreErrors)
     {
         $subRequest = Request::create($uri, Request::METHOD_GET, [], $cache->getRequest()->cookies->all(), [], $cache->getRequest()->server->all());
 
         try {
             $response = $cache->handle($subRequest, HttpKernelInterface::SUB_REQUEST, true);
 
-            if (!$response->isSuccessful() && Response::HTTP_NOT_MODIFIED !== $response->getStatusCode()) {
+            if (!$response->isSuccessful()) {
                 throw new \RuntimeException(sprintf('Error when rendering "%s" (Status code is %d).', $subRequest->getUri(), $response->getStatusCode()));
             }
 
@@ -132,16 +132,5 @@ abstract class AbstractSurrogate implements SurrogateInterface
         } elseif (preg_match(sprintf('#content="%s/1.0",\s*#', $upperName), $value)) {
             $response->headers->set('Surrogate-Control', preg_replace(sprintf('#content="%s/1.0",\s*#', $upperName), '', $value));
         }
-    }
-
-    protected static function generateBodyEvalBoundary(): string
-    {
-        static $cookie;
-        $cookie = hash('md5', $cookie ?? $cookie = random_bytes(16), true);
-        $boundary = base64_encode($cookie);
-
-        \assert(HttpCache::BODY_EVAL_BOUNDARY_LENGTH === \strlen($boundary));
-
-        return $boundary;
     }
 }

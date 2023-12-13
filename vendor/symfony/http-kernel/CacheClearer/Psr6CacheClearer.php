@@ -20,42 +20,24 @@ class Psr6CacheClearer implements CacheClearerInterface
 {
     private $pools = [];
 
-    /**
-     * @param array<string, CacheItemPoolInterface> $pools
-     */
     public function __construct(array $pools = [])
     {
         $this->pools = $pools;
     }
 
-    /**
-     * @return bool
-     */
-    public function hasPool(string $name)
+    public function addPool(CacheItemPoolInterface $pool)
+    {
+        @trigger_error(sprintf('The %s() method is deprecated since Symfony 3.3 and will be removed in 4.0. Pass an array of pools indexed by name to the constructor instead.', __METHOD__), \E_USER_DEPRECATED);
+
+        $this->pools[] = $pool;
+    }
+
+    public function hasPool($name)
     {
         return isset($this->pools[$name]);
     }
 
-    /**
-     * @return CacheItemPoolInterface
-     *
-     * @throws \InvalidArgumentException If the cache pool with the given name does not exist
-     */
-    public function getPool(string $name)
-    {
-        if (!$this->hasPool($name)) {
-            throw new \InvalidArgumentException(sprintf('Cache pool not found: "%s".', $name));
-        }
-
-        return $this->pools[$name];
-    }
-
-    /**
-     * @return bool
-     *
-     * @throws \InvalidArgumentException If the cache pool with the given name does not exist
-     */
-    public function clearPool(string $name)
+    public function clearPool($name)
     {
         if (!isset($this->pools[$name])) {
             throw new \InvalidArgumentException(sprintf('Cache pool not found: "%s".', $name));
@@ -67,7 +49,7 @@ class Psr6CacheClearer implements CacheClearerInterface
     /**
      * {@inheritdoc}
      */
-    public function clear(string $cacheDir)
+    public function clear($cacheDir)
     {
         foreach ($this->pools as $pool) {
             $pool->clear();

@@ -13,39 +13,28 @@ namespace Symfony\Component\HttpKernel\Debug;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\Routing\Exception\ExceptionInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 /**
  * Formats debug file links.
  *
  * @author Jérémy Romey <jeremy@free-agent.fr>
- *
- * @final
  */
-class FileLinkFormatter
+class FileLinkFormatter implements \Serializable
 {
-    private const FORMATS = [
-        'textmate' => 'txmt://open?url=file://%f&line=%l',
-        'macvim' => 'mvim://open?url=file://%f&line=%l',
-        'emacs' => 'emacs://open?url=file://%f&line=%l',
-        'sublime' => 'subl://open?url=file://%f&line=%l',
-        'phpstorm' => 'phpstorm://open?file=%f&line=%l',
-        'atom' => 'atom://core/open/file?filename=%f&line=%l',
-        'vscode' => 'vscode://file/%f:%l',
-    ];
-
     private $fileLinkFormat;
     private $requestStack;
     private $baseDir;
     private $urlFormat;
 
     /**
-     * @param string|array|null $fileLinkFormat
-     * @param string|\Closure   $urlFormat      the URL format, or a closure that returns it on-demand
+     * @param string|\Closure $urlFormat the URL format, or a closure that returns it on-demand
      */
-    public function __construct($fileLinkFormat = null, RequestStack $requestStack = null, string $baseDir = null, $urlFormat = null)
+    public function __construct($fileLinkFormat = null, RequestStack $requestStack = null, $baseDir = null, $urlFormat = null)
     {
-        if (!\is_array($fileLinkFormat) && $fileLinkFormat = (self::FORMATS[$fileLinkFormat] ?? $fileLinkFormat) ?: \ini_get('xdebug.file_link_format') ?: get_cfg_var('xdebug.file_link_format')) {
+        $fileLinkFormat = $fileLinkFormat ?: ini_get('xdebug.file_link_format') ?: get_cfg_var('xdebug.file_link_format');
+        if ($fileLinkFormat && !\is_array($fileLinkFormat)) {
             $i = strpos($f = $fileLinkFormat, '&', max(strrpos($f, '%f'), strrpos($f, '%l'))) ?: \strlen($f);
             $fileLinkFormat = [substr($f, 0, $i)] + preg_split('/&([^>]++)>/', substr($f, $i), -1, \PREG_SPLIT_DELIM_CAPTURE);
         }
@@ -56,11 +45,11 @@ class FileLinkFormatter
         $this->urlFormat = $urlFormat;
     }
 
-    public function format(string $file, int $line)
+    public function format($file, $line)
     {
         if ($fmt = $this->getFileLinkFormat()) {
             for ($i = 1; isset($fmt[$i]); ++$i) {
-                if (str_starts_with($file, $k = $fmt[$i++])) {
+                if (0 === strpos($file, $k = $fmt[$i++])) {
                     $file = substr_replace($file, $fmt[$i], 0, \strlen($k));
                     break;
                 }
@@ -75,21 +64,31 @@ class FileLinkFormatter
     /**
      * @internal
      */
-    public function __sleep(): array
+    public function serialize()
     {
-        $this->fileLinkFormat = $this->getFileLinkFormat();
-
-        return ['fileLinkFormat'];
+        return serialize($this->getFileLinkFormat());
     }
 
     /**
      * @internal
      */
-    public static function generateUrlFormat(UrlGeneratorInterface $router, string $routeName, string $queryString): ?string
+    public function unserialize($serialized)
+    {
+        if (\PHP_VERSION_ID >= 70000) {
+            $this->fileLinkFormat = unserialize($serialized, ['allowed_classes' => false]);
+        } else {
+            $this->fileLinkFormat = unserialize($serialized);
+        }
+    }
+
+    /**
+     * @internal
+     */
+    public static function generateUrlFormat(UrlGeneratorInterface $router, $routeName, $queryString)
     {
         try {
             return $router->generate($routeName).$queryString;
-        } catch (\Throwable $e) {
+        } catch (ExceptionInterface $e) {
             return null;
         }
     }
@@ -99,11 +98,13 @@ class FileLinkFormatter
         if ($this->fileLinkFormat) {
             return $this->fileLinkFormat;
         }
-
         if ($this->requestStack && $this->baseDir && $this->urlFormat) {
-            $request = $this->requestStack->getMainRequest();
+            $request = $this->requestStack->getMasterRequest();
+            if ($request instanceof Request) {
+                if ($this->urlFormat instanceof \Closure && !$this->urlFormat = \call_user_func($this->urlFormat)) {
+                    return null;
+                }
 
-            if ($request instanceof Request && (!$this->urlFormat instanceof \Closure || $this->urlFormat = ($this->urlFormat)())) {
                 return [
                     $request->getSchemeAndHttpHost().$this->urlFormat,
                     $this->baseDir.\DIRECTORY_SEPARATOR, '',
