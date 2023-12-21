@@ -24,6 +24,10 @@ return [
         'secret' => '',
     ],
 
+    'postmark' => [
+        'token' => '',
+    ],
+
     'ses' => [
         'key' => '',
         'secret' => '',
@@ -35,7 +39,7 @@ return [
     ],
 
     'stripe' => [
-        'model'  => 'User',
+        'model' => 'User',
         'secret' => '',
     ],
 
