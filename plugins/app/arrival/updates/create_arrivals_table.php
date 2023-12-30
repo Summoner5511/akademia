@@ -6,17 +6,19 @@ use October\Rain\Database\Updates\Migration;
 
 class CreateArrivalsTable extends Migration
 {
+   
     public function up()
     {
         Schema::create('app_arrival_arrivals', function (Blueprint $table) {
-            $table->engine = 'InnoDB';
             $table->increments('id');
             $table->string('name');
             $table->date('time');
             $table->timestamps();
+            $table->engine = 'InnoDB';
+           
         });
     }
-
+    
     public function down()
     {
         Schema::dropIfExists('app_arrival_arrivals');

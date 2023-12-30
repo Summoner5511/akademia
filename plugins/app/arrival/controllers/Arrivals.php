@@ -32,5 +32,10 @@ class Arrivals extends Controller
 
         BackendMenu::setContext('App.Arrival', 'arrival', 'arrivals');
     }
-    
+    public $belongsTo = [
+        'user' => ['Models\Arrival'],
+    ];
+    public $hasMany = [
+        'arrivals' => ['App\Arrival\Models\Arrival'],
+    ];
 }
