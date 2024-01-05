@@ -1,18 +1,18 @@
-<?php namespace App\Arrival\Models;
+<?php namespace App\User\Models;
 
-use October\Rain\Database\Model;
+use Model;
 
 /**
- * Arrival Model
+ * User Model
  */
-class Arrival extends Model
+class User extends Model
 {
     use \October\Rain\Database\Traits\Validation;
 
     /**
      * @var string The database table used by the model.
      */
-    public $table = 'app_arrival_arrivals';
+    public $table = 'app_user_users';
 
     /**
      * @var array Guarded fields
@@ -54,8 +54,7 @@ class Arrival extends Model
      */
     protected $dates = [
         'created_at',
-        'updated_at',
-        'time'
+        'updated_at'
     ];
 
     /**
@@ -63,9 +62,9 @@ class Arrival extends Model
      */
     public $hasOne = [];
     public $hasMany = [];
-    public $belongsTo = [
-        'user' => ['RainLab\User\Models\User', 'key' => 'user_id'],
-    ];
+    public $hasOneThrough = [];
+    public $hasManyThrough = [];
+    public $belongsTo = [];
     public $belongsToMany = [];
     public $morphTo = [];
     public $morphOne = [];

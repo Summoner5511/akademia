@@ -32,4 +32,5 @@
   'RainLab\\User\\Models\\Settings' => 'plugins\\rainlab\\user\\models\\Settings.php',
   'LibUser\\Userapi\\Http\\Resources\\UserResource' => 'plugins\\libuser\\userapi\\http\\resources\\UserResource.php',
   'RainLab\\User\\Models\\Throttle' => 'plugins\\rainlab\\user\\models\\Throttle.php',
+  'app\\user\\Plugin' => 'plugins\\app\\user\\Plugin.php',
 );
