@@ -19,4 +19,16 @@ class ArrivalsController extends Controller
         $arrival = Arrival::findOrFail($id);
         return ArrivalResource::make($arrival);
     }
+    public function save()
+    {
+        $user = auth()->user();
+        $arrival = new Arrival;
+
+        $arrival->name = post('name');
+        $arrival->user_id = $user->id;
+        $arrival->created_at = post('created_at');
+        $arrival->save();
+
+        return ArrivalResource::make($arrival);
+    }
 }
