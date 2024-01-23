@@ -13,7 +13,7 @@ class CreateArrivalsTable extends Migration
             $table->engine = 'InnoDB';
             $table->increments('id');
             $table->string('name');
-            $table->date('time');
+            $table->date('time')->nullable();
             $table->integer('user_id');
             $table->timestamps();
            

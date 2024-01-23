@@ -26,6 +26,7 @@ class ArrivalsController extends Controller
 
         $arrival->name = post('name');
         $arrival->user_id = $user->id;
+        $arrival->date = now();
         $arrival->created_at = post('created_at');
         $arrival->save();
 
