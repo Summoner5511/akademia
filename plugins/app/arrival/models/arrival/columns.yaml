@@ -9,10 +9,6 @@ columns:
     name:
         label: Name
         searchable: true
-    time:
-        label: prichod
-        searchable: true
-        type: datetime
     user_id: 
         label: user_id
         

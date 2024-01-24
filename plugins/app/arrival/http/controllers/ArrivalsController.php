@@ -22,11 +22,10 @@ class ArrivalsController extends Controller
     public function save()
     {
         $user = auth()->user();
-        $arrival = new Arrival;
+        $arrival = new Arrival();
 
         $arrival->name = post('name');
         $arrival->user_id = $user->id;
-        $arrival->date = now();
         $arrival->created_at = post('created_at');
         $arrival->save();
 

@@ -10,7 +10,7 @@ class ArrivalResource extends Resource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'date' => $this->time->format('d.m.Y H:i')
+            
         ];
     }
 }
