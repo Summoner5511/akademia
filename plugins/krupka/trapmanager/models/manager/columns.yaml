@@ -1,0 +1,18 @@
+# ===================================
+#  List Column Definitions
+# ===================================
+
+columns:
+    id:
+        label: ID
+        searchable: true
+    type: 
+        label: Typ
+        searchable: true
+    percentage:
+        label: percento zjedene
+        searchable: true
+    count: 
+        label: chytene mysi
+        searchable: true
+   

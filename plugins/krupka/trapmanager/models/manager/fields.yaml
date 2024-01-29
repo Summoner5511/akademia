@@ -1,0 +1,15 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    id:
+        label: ID
+        disabled: true
+    type: 
+        label: Typ
+    percentage:
+        label: percento zjedene
+    count: 
+        label: chytene mysi
+
