@@ -5,6 +5,7 @@ use App\Arrival\Http\Resources\ArrivalResource;
 use App\Arrival\Models\Arrival;
 use Illuminate\Routing\Controller;
 use LibUser\Userapi\Http\Resources\UserResource;
+use October\Rain\Support\Facades\Event;
 
 class ArrivalsController extends Controller
 {
@@ -38,6 +39,7 @@ class ArrivalsController extends Controller
         $userResource = new UserResource($user);
         $arrivals = Arrival::where('user_id', $user->id)->get();
 
+        Event::fire('user.requested');
         return ArrivalResource::collection($arrivals, $userResource);
     }
 }
