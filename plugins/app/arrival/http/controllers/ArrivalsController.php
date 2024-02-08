@@ -4,6 +4,7 @@ use App\Arrival\Controllers\Arrivals;
 use App\Arrival\Http\Resources\ArrivalResource;
 use App\Arrival\Models\Arrival;
 use Illuminate\Routing\Controller;
+use LibUser\Userapi\Http\Resources\UserResource;
 
 class ArrivalsController extends Controller
 {
@@ -30,5 +31,13 @@ class ArrivalsController extends Controller
         $arrival->save();
 
         return ArrivalResource::make($arrival);
+    }
+    public function getUserArrivals()
+    {
+        $user = auth()->user();
+        $userResource = new UserResource($user);
+        $arrivals = Arrival::where('user_id', $user->id)->get();
+
+        return ArrivalResource::collection($arrivals, $userResource);
     }
 }

@@ -18,6 +18,8 @@ Route::group([
             //Route::get('arrivals', [ArrivalsController::class, 'index']);
             Route::get('users/{id}', '\App\Arrival\Http\Controllers\ArrivalsController@show');
             Route::post('arrival', '\App\Arrival\Http\Controllers\ArrivalsController@save');
+            Route::get('yourarrivals', '\App\Arrival\Http\Controllers\ArrivalsController@getUserArrivals');
+            
         });
 });
 
