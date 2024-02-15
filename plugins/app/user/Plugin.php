@@ -3,6 +3,7 @@
 use Backend;
 use System\Classes\PluginBase;
 use App\Arrival\Models\Arrival;
+use App\User\Models\User;
 /**
  * user Plugin Information File
  */
@@ -33,7 +34,14 @@ class Plugin extends PluginBase
      */
     public function boot()
     {
-        
+        Arrival::extend(function ($model) {
+            $model->hasOne['user'] = 'App\User\Models\User';
+            $model->bindEvent('model.afterUpdate', function ($model) {
+                if($model->user){
+                    $model->user->save();
+                }
+            });
+        });
     
     }
 

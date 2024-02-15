@@ -64,7 +64,7 @@ class Arrival extends Model
     public $hasOne = [];
     public $hasMany = [];
     public $belongsTo = [
-        'user' => ['RainLab\User\Models\User', 'key' => 'user_id'],
+        'user' => 'RainLab\User\Models\User',
     ];
     public $belongsToMany = [];
     public $morphTo = [];
